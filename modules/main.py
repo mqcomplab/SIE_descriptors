@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from enum import Enum
 from scipy.optimize import curve_fit
 from adjustText import adjust_text
 from scipy.optimize import curve_fit
@@ -9,34 +10,25 @@ from sklearn.linear_model import LinearRegression
 from contextlib import suppress
 import modules.formulas
 
-def get_property_col(property):
+class prop_col(Enum):
     """
     dG: Gibbs Free Energy, dH: Enthalpy, viscosity: Viscosity-B coefficients of electrolyte solutions per coordinating water molecule,
     diffusion: Diffusion coefficients of ions in water, gfet: Gibbs free energies of ion transfer from water to methanol,
     dlcst: ΔLCST of pNIPAM-coated silica particles in 1 M electrolyte solutions, sn2: SN2 reaction rate of iodomethane and ionic nucleophiles in methanol,
     activity: Activity of a human rhinovirus, lysosome: Temperature dependence of the cloud point of lysozyme.
     """
-    if property == "dG":
-        property = 6
-    elif property == "dH":
-        property = 8
-    elif property == "viscosity":
-        property = 9
-    elif property == "diffusion":
-        property = 10
-    elif property == "gfet":
-        property = 11
-    elif property == "dlcst":
-        property = 12
-    elif property == "sn2":
-        property = 13
-    elif property == "activity":
-        property = 14
-    elif property == "lysozyme":
-        property = 15
-    else:
-        raise ValueError("Not a valid property. The options are dG, dH, viscosity, diffusion, gfet, dlcst, sn2, activity, and lysozyme.")   
-    return property
+    dG = 6
+    dH = 8
+    viscosity = 9
+    diffusion = 10
+    gfet = 11
+    dlcst = 12
+    sn2 = 13
+    activity = 14
+    lysozyme = 15
+
+def get_property_col(property):
+    return prop_col[property].value
 
 def need_homo_1(formula):
     """ Is it a formula that requires E_HOMO-1 values? """
@@ -51,8 +43,10 @@ def need_homo_1(formula):
 
 def read_data(file_name, property, formula, by_charge):
     """ 
-    Load the dataset. Files must be in CSV UTF-8 format to recognize chemical formulas. All rows containing NaN values will be excluded from the new dataframe.
-    by_charge = False for generating one dataframe, stats tables, and plotting all charges. by_charge = True for generating a list of dataframes and plotting by charges. 
+    Load the dataset. Files must be in CSV UTF-8 format to recognize chemical formulas.
+    All rows containing NaN values will be excluded from the new dataframe.
+    by_charge = False for generating one dataframe, stats tables, and plotting all charges.
+    by_charge = True for generating a list of dataframes and plotting by charges. 
     """
     property = get_property_col(property)
     if need_homo_1(formula) is True:
@@ -155,9 +149,6 @@ def custom_axis(formula, property, ax):
         ax.set_xlabel('Experimental 'r'$\mathrm{Lysozyme~c~(^{\circ}C/M)}$')
         ax.set_ylabel('Theoretical 'r'$\mathrm{Lysozyme~c~(^{\circ}C/M)}$')
 
-    else:
-        raise ValueError("Not valid. The options are dG, dH, viscosity, diffusion, gfet, dlcst, sn2, activity, and lysozyme.")
-
     return ax
 
 def get_errors(prop, fit_data, parameters):
@@ -203,107 +194,27 @@ def replace_aicc(aicc_list, stats_result):
     return stats_result
 
 def print_stats(formula, parameters, SE, mean_abs_err, rmse, loocv, aicc):
-    if formula == "Q1R1":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1])]}
-        
-    elif formula == "Q1R2":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "α"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2])]}
-
-    elif formula == "Q2R1":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2])]}
-
-    elif formula == "Q2R2":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "α"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2]), float('%.4g' % parameters[3])]}
-
-    elif formula == "Q3R1":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1])]}
-
-    elif formula == "Q3R2":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "α"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2])]}
-
-    elif formula == "Q4R1":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b" , "h"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2])]}
-
-    elif formula == "Q4R2":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "h", "α"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2]), float('%.4g' % parameters[3])]}
-
-    elif formula == "Q5R1":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b" , "a"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2])]}
-
-    elif formula == "Q5R2":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "a", "α"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2]), float('%.4g' % parameters[3])]}
-
-    elif formula == "Q6R1":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "ξ"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2]), float('%.4g' % parameters[3])]}
-
-    elif formula == "Q6R2":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "ξ", "α"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2]), float('%.4g' % parameters[3]), 
-                float('%.4g' % parameters[4])]}
-
-    elif formula == "Q7R1":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "ξ", "h"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2]), float('%.4g' % parameters[3]), 
-                float('%.4g' % parameters[4])]}
-
-    elif formula == "Q7R2":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "ξ", "h", "α"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2]), float('%.4g' % parameters[3]), 
-                float('%.4g' % parameters[4]), float('%.4g' % parameters[5])]}
-
-    elif formula == "Q8R1":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "ξ", "a"],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2]), float('%.4g' % parameters[3]), 
-                float('%.4g' % parameters[4])]}
-
-    elif formula == "Q8R2":
-        stats = {" ": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "ξ", "a", "α", ],
-                f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), float('%.4g' % aicc),
-                float('%.4g' % parameters[0]), float('%.4g' % parameters[1]),
-                float('%.4g' % parameters[2]), float('%.4g' % parameters[3]), 
-                float('%.4g' % parameters[4]), float('%.4g' % parameters[5])]}
-
-    else:
-        raise ValueError("Not a valid formula; Only valid are Q[1-8]*R[1-2]*.")
+    stats_dict = {
+        "Q1R1": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b"],
+        "Q1R2": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "α"],
+        "Q2R1": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ"],
+        "Q2R2": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "α"],
+        "Q3R1": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b"],
+        "Q3R2": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "α"],
+        "Q4R1": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "h"],
+        "Q4R2": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "h", "α"],
+        "Q5R1": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b" , "a"],
+        "Q5R2": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "a", "α"],
+        "Q6R1": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "ξ"],
+        "Q6R2": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "ξ", "α"],
+        "Q7R1": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "ξ", "h"],
+        "Q7R2": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "ξ", "h", "α"],
+        "Q8R1": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "ξ", "a"],
+        "Q8R2": ["MAE", "RMSE", "LOOCV", "dAICc", "m", "b", "γ", "ξ", "a", "α"]
+    }   
+    stats = {" ": stats_dict[formula],
+            f"{formula}": [float('%.4g' % mean_abs_err), float('%.4g' % rmse), float('%.4g' % loocv), 
+            float('%.4g' % aicc)] + [float('%.4g' % p) for p in parameters]}
 
     stats_df = pd.DataFrame(stats).set_index(" ")
     return stats_df
