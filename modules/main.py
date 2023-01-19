@@ -43,10 +43,8 @@ def need_homo_1(formula):
 
 def read_data(file_name, property, formula, by_charge):
     """ 
-    Load the dataset. Files must be in CSV UTF-8 format to recognize chemical formulas.
-    All rows containing NaN values will be excluded from the new dataframe.
-    by_charge = False for generating one dataframe, stats tables, and plotting all charges.
-    by_charge = True for generating a list of dataframes and plotting by charges. 
+    Load the dataset. Files must be in CSV UTF-8 format to recognize chemical formulas. All rows containing NaN values will be excluded from the new dataframe.
+    by_charge = False for generating one dataframe, stats tables, and plotting all charges. by_charge = True for generating a list of dataframes and plotting by charges. 
     """
     property = get_property_col(property)
     if need_homo_1(formula) is True:
