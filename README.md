@@ -8,10 +8,8 @@ perturbed descriptors and using different models of charge transfer in solution.
 ```modules/main.py``` contains all the predefined functions to read csv table, do fitting, and custom plots and tables. All scripts in current directory will run execute those functions. 
 
 The naming scheme of files is: ```{a}_{b}_{c}_{d}.py```
-<style type="text/css">
-    ol { list-style-type: upper-alpha; }
-</style>
-a. all, cat, ani - fitting all ions, cations, or anions, respectively.
-b. 1, formula - reading the script for one or all formulas, respectively. 
-c. 1, prop - reading the script for one or all properties, respectively.
-d. 
+
+- ```a``` all, cat, ani, charge - fitting all ions, cations, anions, or cations/anions respectively.
+- ```b``` 1, formula - reading the script for one or all formulas, respectively. 
+- ```c``` 1, prop - reading the script for one or all properties, respectively.
+- ```d``` plot, table - plot will produce fitted plot or table will produce error analysis and fit values.
