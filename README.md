@@ -5,7 +5,7 @@ conceptual DFT (C-DFT) to approximate the charge and radius of an ion with or wi
 perturbed descriptors and using different models of charge transfer in solution.
 
 ### Usage
-```modules/main.py``` contains all the predefined functions to read csv table, do fitting, and custom plots and tables. All scripts in current directory will run execute those functions. 
+```modules/main.py``` contains all the predefined functions to read csv table, do fitting, and custom plots and tables, and ```modules/formula.py``` includes all the formulas designated to model $Q$, charge or $R$, size. All scripts in current directory will run execute those functions. ```formula_latexify.py``` can visualize the 16 formulas in cleaner format.
 
 The naming scheme of files is: ```{a}_{b}_{c}_{d}.py```
 
