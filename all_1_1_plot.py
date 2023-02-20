@@ -8,7 +8,6 @@ start = time.perf_counter()
 file_name = f"csv/ions.csv"
 formula = "Q7R2"
 property = "dH"
-#formulas = importlib.import_module("formulas")
 
 if __name__ == "__main__":
     formula_func = getattr(mod.formulas, formula)
