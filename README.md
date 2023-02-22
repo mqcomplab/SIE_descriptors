@@ -6,7 +6,7 @@
 <img src="img/po4.png" width=180 height=auto align="center"></a>
 
 ### About
-SIE_descriptors allows users to predict specific ion effect (SIE) properties through magnitudes extracted from
+```SIE_descriptors``` allows users to predict specific ion effect (SIE) properties through magnitudes extracted from
 conceptual DFT (C-DFT) to approximate the charge and radius of an ion with or without
 perturbed descriptors and using different models of charge transfer in solution.
 
