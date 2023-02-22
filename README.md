@@ -1,4 +1,10 @@
 ## Quantifying specific ion effects through charge transfer models
+
+<img src="img/nc3h7_4.png" width=180 height=auto align="center"></a>
+<img src="img/h2po4.png" width=180 height=auto align="center"></a>
+<img src="img/nch3.png" width=180 height=auto align="center"></a>
+<img src="img/po4.png" width=180 height=auto align="center"></a>
+
 ### About
 SIE_descriptors allows users to predict specific ion effect properties through magnitudes extracted from
 conceptual DFT (C-DFT) to approximate the charge and radius of an ion with or without
