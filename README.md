@@ -1,4 +1,4 @@
-## Quantifying specific ion effects through charge transfer models
+# Quantifying specific ion effects through charge transfer models
 
 <img src="img/nc3h7_4.png" width=180 height=auto align="center"></a>
 <img src="img/h2po4.png" width=180 height=auto align="center"></a>
