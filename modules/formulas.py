@@ -1,4 +1,7 @@
-# All 16 formulas
+"""
+This scripts contains all 16 formulas or models
+Author: Lexin Chen
+"""
 import numpy as np
 def Q1R1(X, m, b):
   homo, lumo = X
