@@ -1,4 +1,7 @@
-# This script generates plot for fitting all charges using one formula and one property.
+"""
+This script generates plot for fitting all charges using one formula and one property.
+Author: Lexin Chen
+"""
 import modules as mod
 import matplotlib.pyplot as plt
 import time
