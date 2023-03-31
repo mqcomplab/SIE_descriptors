@@ -1,4 +1,7 @@
-# This script generates a statistical analysis table on for fitting all charges using all formulas and one property.
+"""
+This script generates a statistical analysis table on for fitting all charges using all formulas and one property.
+Author: Lexin Chen
+"""
 import modules as mod
 from tabulate import tabulate
 import pandas as pd
