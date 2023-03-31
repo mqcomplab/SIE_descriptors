@@ -1,4 +1,7 @@
-# This script generates multiple statistal analysis tables for fitting anions using all 16 formulas and one properties.
+"""
+This script generates multiple statistal analysis tables for fitting anions using all 16 formulas and one properties.
+Author: Lexin Chen
+"""
 import modules as mod
 from tabulate import tabulate
 import pandas as pd
