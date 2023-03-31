@@ -1,4 +1,7 @@
-# This script generates multiple statistal analysis tables for fitting cations using all 16 formulas and all 9 properties.
+"""
+This script generates multiple statistal analysis tables for fitting cations using all 16 formulas and all 9 properties.
+Author: Lexin Chen
+"""
 import modules as mod
 from tabulate import tabulate
 import pandas as pd
