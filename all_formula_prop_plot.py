@@ -1,4 +1,7 @@
-# This script generates multiple plots for fitting all charges using all 16 formulas and all 9 properties.
+"""
+This script generates multiple plots for fitting all charges using all 16 formulas and all 9 properties.
+Author: Lexin Chen
+"""
 import modules as mod
 import matplotlib.pyplot as plt
 import time
