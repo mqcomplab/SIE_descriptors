@@ -1,3 +1,7 @@
+"""
+This scripts contains the base functions to run the scripts in the root directory
+Author: Lexin Chen
+"""
 import pandas as pd
 import numpy as np
 from enum import Enum
