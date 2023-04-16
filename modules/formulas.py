@@ -38,11 +38,11 @@ def Q2R2(X, m, b, gamma, alpha):
 
 def Q3R1(X, m, b):
   homo, lumo, homo1 = X
-  return m * (- (-(-homo-lumo)/2/(-homo+lumo)) - ((-(-homo-lumo)/2) ** 2 / ( 2 * (-homo + lumo)) ** 3) * (-2*homo + lumo + homo1))/((-homo+lumo) ** -1) + b
+  return m * (- (-(-homo - lumo)/2/(-homo + lumo)) - ((-(-homo - lumo)/2) ** 2 / ( 2 * (-homo + lumo)) ** 3) * (-2 * homo + lumo + homo1))/((-homo + lumo) ** -1) + b
 
 def Q3R2(X, m, b, alpha):
   homo, lumo, homo1 = X
-  return m * (- (-(-homo-lumo)/2/(-homo+lumo)) - ((-(-homo-lumo)/2) ** 2 / ( 2 * (-homo + lumo)) ** 3) * (-2*homo + lumo + homo1))/((-homo+lumo) ** alpha) + b
+  return m * (- (-(-homo - lumo)/2/(-homo + lumo)) - ((-(-homo - lumo)/2) ** 2 / ( 2 * (-homo + lumo)) ** 3) * (-2*homo + lumo + homo1))/((-homo + lumo) ** alpha) + b
 
 def Q4R1(X, m, b, h):
   homo, lumo = X
@@ -62,27 +62,27 @@ def Q5R2(X, m, b, a, alpha):
 
 def Q6R1(X, m, b, gamma, xi):
   homo, lumo, homo1 = X
-  return m * ((-(-(-homo*gamma-lumo)/(1+gamma))/(xi * (-homo+lumo))) -((-(-homo*gamma-lumo)/(2)) ** 2 /( 2 * xi **3 * (-homo+lumo) **3)) * (-2*homo + lumo + homo1))/((-homo+lumo) ** -1) + b
+  return m * ((-(-(-homo * gamma - lumo)/(1 + gamma))/(xi * (-homo + lumo))) -((-(-homo * gamma - lumo)/(2)) ** 2 /( 2 * xi ** 3 * (-homo + lumo) **3)) * (-2 * homo + lumo + homo1))/((-homo + lumo) ** -1) + b
 
 def Q6R2(X, m, b, gamma, xi, alpha):
   homo, lumo, homo1 = X
-  return m * ((-(-(-homo*gamma-lumo)/(1+gamma))/(xi * (-homo+lumo))) -((-(-homo*gamma-lumo)/(2)) ** 2 /( 2 * xi **3 * (-homo+lumo) **3)) * (-2*homo + lumo + homo1))/((-homo+lumo) ** alpha) + b
+  return m * ((-(-(-homo * gamma - lumo)/(1 + gamma))/(xi * (-homo + lumo))) -((-(-homo * gamma - lumo)/(2)) ** 2 /( 2 * xi ** 3 * (-homo + lumo) ** 3)) * (-2 * homo + lumo + homo1))/((-homo + lumo) ** alpha) + b
 
 def Q7R1(X, m, b, gamma, xi, h):
   homo, lumo = X
-  return m * ((-(-(-homo*gamma-lumo)/(1+gamma))/(xi * (-homo+lumo))) - h * ((-(-homo*gamma-lumo)/(2)) ** 2 /( 2 * xi **3 * (-homo+lumo) **3))) /((-homo+lumo) ** -1) + b
+  return m * ((-(-(-homo * gamma - lumo)/(1 + gamma))/(xi * (-homo + lumo))) - h * ((-(-homo * gamma - lumo)/(2)) ** 2 /( 2 * xi ** 3 * (-homo + lumo) ** 3))) /((-homo + lumo) ** -1) + b
 
 def Q7R2(X, m, b, gamma, xi, h, alpha):
   homo, lumo = X
-  return m * ((-(-(-homo*gamma-lumo)/(1+gamma))/(xi * (-homo+lumo))) - h * ((-(-homo*gamma-lumo)/(2)) ** 2 /( 2 * xi **3 * (-homo+lumo) **3))) /((-homo+lumo) ** alpha) + b
+  return m * ((-(-(-homo * gamma - lumo)/(1 + gamma))/(xi * (-homo + lumo))) - h * ((-(-homo * gamma - lumo)/(2)) ** 2 /( 2 * xi ** 3 * (-homo + lumo) ** 3))) /((-homo + lumo) ** alpha) + b
 
 def Q8R1(X, m, b, gamma, xi, a):
   homo, lumo = X
-  return m * ((-(-(-homo*gamma-lumo)/(1+gamma))/(xi * (-homo+lumo))) - a * ((-(-homo*gamma-lumo)/(2)) ** 2 /( 2 * xi **2 * (-homo+lumo) **2))) /((-homo+lumo) ** -1) + b
+  return m * ((-(-(-homo * gamma - lumo)/(1 + gamma))/(xi * (-homo + lumo))) - a * ((-(-homo * gamma - lumo)/(2)) ** 2 /( 2 * xi **2 * (-homo + lumo) **2))) /((-homo + lumo) ** -1) + b
 
 def Q8R2(X, m, b, gamma, xi, a, alpha):
   homo, lumo = X
-  return m * ((-(-(-homo*gamma-lumo)/(1+gamma))/(xi * (-homo+lumo))) - a * ((-(-homo*gamma-lumo)/(2)) ** 2 /( 2 * xi **2 * (-homo+lumo) **2)) )/((-homo+lumo) ** alpha) + b
+  return m * ((-(-(-homo * gamma - lumo)/(1 + gamma))/(xi * (-homo + lumo))) - a * ((-(-homo * gamma - lumo)/(2)) ** 2 /( 2 * xi **2 * (-homo + lumo) **2)) )/((-homo + lumo) ** alpha) + b
 
 def calculate_aicc(n, mse, num_params):
     aic = n * np.log(mse) + 2 * num_params
