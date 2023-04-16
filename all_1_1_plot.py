@@ -9,13 +9,13 @@ import matplotlib.pyplot as plt
 import time
 import os
 
-start = time.perf_counter()
 file_name = f"csv/ions.csv"
 formula = "Q7R2"
 property = "dG"
 save_dir_path = f"graphs/{property}"
 
 if __name__ == "__main__":
+    start = time.perf_counter()
     if not os.path.exists(save_dir_path):
         os.makedirs(save_dir_path)
     formula_func = getattr(mod.formulas, formula)
