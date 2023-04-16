@@ -1,6 +1,6 @@
 """
 This script generates multiple plots for fitting all charges using all 16 formulas and all 9 properties.
-Author: Lexin Chen
+PNG file is saved to `graphs/{property}` directory.
 """
 import modules as mod
 import matplotlib.pyplot as plt
@@ -23,11 +23,12 @@ if __name__ == "__main__":
                 prop, fit_data, parameters, SE = mod.fit_parameters(formula, formula_func, property, df)
                 ax = mod.custom_axis(formula, property, ax)
                 ax = mod.plot_all_charges(prop, fit_data, ax, df)
-            dir_name = f"graphs/{property}"
+            save_dir_path = f"graphs/{property}"
+            if not os.path.exists(save_dir_path):
+                os.makedirs(save_dir_path)
             figure_name = f"{formula}_{property}"
-            my_path = os.path.abspath(dir_name)
-            fig.savefig(os.path.join(my_path, figure_name), bbox_inches = "tight", dpi = 300, transparent = True)
+            fig.savefig(f"{save_dir_path}/{figure_name}", bbox_inches = "tight", dpi = 300, transparent = True)
             plt.close()
             print(f"Finished with {formula}: {property}..")
-end = time.perf_counter()
-print(f'Finished in {round(end-start,2)} seconds')      # All charges takes 7.4 min on a regular laptop.
+    end = time.perf_counter()
+    print(f'Finished in {round(end-start,2)} seconds')      # All charges takes 7.4 min on a regular laptop.
