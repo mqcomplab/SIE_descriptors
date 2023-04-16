@@ -8,13 +8,15 @@ Args:
     save_dir_path (str): path to the directory where the output table will be saved.
 
 Output:
-    text file (file): "all_<property>.txt", A table of the results of the fitting.
-        (parameters, standard errors, mean absolute error, root-mean-squared error, leave-one-out cross-validation, and AICc)
-        Output is a LaTex formatted table, which you can directly copy to LaTex editor.
+    text file (file): A table of the results of the fitting and assess quality of the fit. (parameters and error analysis)
+        "all_<property>.txt" is a LaTex formatted table, which you can directly copy to LaTex editor.
+
+Usage:
+    python all_formula_1_table.py
 
 Notes:
     The script uses modules from `modules`.
-    Good for experimenting different variable, will produce one file.
+    Good for evaluating the quality of the fit for all ions under one property.
 """
 
 import modules as mod
