@@ -1,22 +1,18 @@
-"""
-Q1R1 - Q8R2 are the 16 charge transfer models for predicting specific ion effect (SIE) properties. 
+""" Q1R1 - Q8R2 are the 16 charge transfer models for predicting specific ion effect (SIE) properties. 
 
-Parameters
------------
-(all floats)
-X : two values of HOMO and LUMO energies
-m : fitting parameter, slope in the linear regression
-b : fitting parameter, y-intercept in the linear regression
-alpha : fitting parameter, size descriptor
-gamma : fitting parameter for charge descriptor
-b : fitting parameter for charge descriptor
-a : fitting parameter for charge descriptor
-xi : fitting parameter for charge descriptor
-h : fitting parameter for charge descriptor
+Args:
+  X (float): two values of HOMO and LUMO energies
+  m (float): fitting parameter, slope in the linear regression
+  b (float): fitting parameter, y-intercept in the linear regression
+  alpha (float): fitting parameter, size descriptor
+  gamma (float): fitting parameter for charge descriptor
+  b (float): fitting parameter for charge descriptor
+  a (float): fitting parameter for charge descriptor
+  xi (float): fitting parameter for charge descriptor
+  h (float): fitting parameter for charge descriptor
 
-Return
-------------
-The predicted SIE property value for the model. 
+Returns:
+  The predicted SIE property value for the model. 
 """
 
 import numpy as np
@@ -85,24 +81,15 @@ def Q8R2(X, m, b, gamma, xi, a, alpha):
   return m * ((-(-(-homo * gamma - lumo)/(1 + gamma))/(xi * (-homo + lumo))) - a * ((-(-homo * gamma - lumo)/(2)) ** 2 /( 2 * xi **2 * (-homo + lumo) **2)) )/((-homo + lumo) ** alpha) + b
 
 def calculate_aicc(n, mse, num_params):
-  """
-  Calculates the Akaike information criterion (AIC) with small sample correction
+  """Calculates the Akaike information criterion (AIC) with small sample correction
   
-  Parameters
-  ----------
-  n : int 
-    number of observations
+  Args:
+    n (int): number of observations
+    mse (float): mean square error
+    num_params (int): number of parameters
   
-  mse : float
-    mean square error
-  
-  num_params: int
-    number of parameters
-  
-  Return
-  ----------
-  aic_c : float
-    value for AIC corrected for small samples
+  Returns:
+  aic_c (float): value for AIC corrected for small samples
   """
   aic = n * np.log(mse) + 2 * num_params
   aic_c = aic + (2 * num_params * (num_params + 1))/(n - num_params - 1)
