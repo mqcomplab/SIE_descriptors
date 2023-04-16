@@ -1,14 +1,13 @@
 """
 This script generates plot for fitting all charges using one formula and one property.
-Author: Lexin Chen
+Change variables before `if __name__ == "__main__"` to experiment with different combinations.
+PNG file is saved to the `save_dir_path` directory.
 """
+
 import modules as mod
 import matplotlib.pyplot as plt
 import time
 import os
-"""
-Change variables before `if __name__ == "__main__"` to experiment with different combinations.
-"""
 
 start = time.perf_counter()
 file_name = f"csv/ions.csv"
