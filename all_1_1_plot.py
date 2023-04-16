@@ -1,7 +1,21 @@
 """
-This script generates plot for fitting all charges using one formula and one property.
-Change variables before `if __name__ == "__main__"` to experiment with different combinations.
-PNG file is saved to the `save_dir_path` directory.
+This script generates a plot for the prediction of specific ion effect property values by fitting all ions to charge transfer model. 
+
+Args:
+    file_name (str): the name of the CSV file containing the data
+    formula (str): the chemical formula of the ion
+    property (str): the thermodynamic property to plot
+    save_dir_path (str): the directory to save the plot image
+
+Output:
+    A plot of the specified thermodynamic property for the Q7R2 ion, saved as a PNG image in the specified directory.
+
+Usage:
+    python all_1_1_plot.py
+    
+Notes:
+    The script uses modules from `modules`.
+    Good for experimenting different variable, will produce one plot.
 """
 
 import modules as mod

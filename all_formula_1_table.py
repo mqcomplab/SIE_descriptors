@@ -1,7 +1,20 @@
 """
-This script generates a statistical analysis table on for fitting all charges using all formulas and one property.
-Change variables before `if __name__ == "__main__"` to experiment with different combinations.
-Output is a LaTex formatted table, which you can directly copy to LaTex editor.
+This script generates a statistical analysis for the prediction of specific ion effect property values by fitting all ions to charge transfer model. 
+
+Args:
+    file_name (str): path to the CSV file containing the data to be analyzed.
+    formula_list (list of str): charge transfer models to be fitted.
+    property (str): thermodynamic property to be fitted (e.g. "dG", "dH").
+    save_dir_path (str): path to the directory where the output table will be saved.
+
+Output:
+    text file (file): "all_<property>.txt", A table of the results of the fitting.
+        (parameters, standard errors, mean absolute error, root-mean-squared error, leave-one-out cross-validation, and AICc)
+        Output is a LaTex formatted table, which you can directly copy to LaTex editor.
+
+Notes:
+    The script uses modules from `modules`.
+    Good for experimenting different variable, will produce one file.
 """
 
 import modules as mod
