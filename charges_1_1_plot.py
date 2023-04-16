@@ -1,6 +1,7 @@
 """
 This script generates multiple plots for fitting anions/cations using all 16 formulas and all one properties.
-Author: Lexin Chen
+Change variables before `if __name__ == "__main__"` to experiment with different combinations.
+PNG file is saved to the `save_dir_path` directory.
 """
 import modules as mod
 import matplotlib.pyplot as plt
@@ -14,8 +15,12 @@ file_name = f"csv/{ion_type}.csv"
 formula = "Q4R1"
 modulename = 'formulas'
 property = "dH"
+save_dir_path = f"graphs/{property}"
 
 if __name__ == "__main__":
+    start = time.perf_counter()
+    if not os.path.exists(save_dir_path):
+        os.makedirs(save_dir_path)
     formula_func = getattr(mod.formulas, formula)
     df_list = mod.read_data(file_name, property, formula, by_charge=True)
     fig, ax = plt.subplots()
@@ -25,10 +30,7 @@ if __name__ == "__main__":
             prop, fit_data, parameters, SE = mod.fit_parameters(formula, formula_func, property, each_df)
             ax = mod.plot_by_charge(prop, fit_data, ax, ion_type, each_df)
     plt.legend()
-    dir_name = f"graphs/{property}"
     figure_name = f"{ion_type[:3]}_{formula}_{property}"
-    my_path = os.path.abspath(dir_name)
-    fig.savefig(os.path.join(my_path, figure_name), bbox_inches = "tight", dpi = 300, transparent = True)
-
-end = time.perf_counter()
-print(f'Finished in {round(end-start,2)} seconds')
+    fig.savefig(f"{save_dir_path}/{figure_name}", bbox_inches = "tight", dpi = 300, transparent = True)
+    end = time.perf_counter()
+    print(f'Finished in {round(end-start,2)} seconds')

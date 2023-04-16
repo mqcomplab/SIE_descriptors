@@ -3,6 +3,7 @@ This script generates multiple statistal analysis tables for fitting cations usi
 Change variables before `if __name__ == "__main__"` to experiment with different combinations.
 Output is a LaTex formatted table, which you can directly copy to LaTex editor.
 """
+
 import modules as mod
 from tabulate import tabulate
 import pandas as pd
