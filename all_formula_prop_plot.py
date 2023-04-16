@@ -8,12 +8,12 @@ import time
 from contextlib import suppress
 import os
 
-start = time.perf_counter()
 file_name = f"csv/ions.csv"
 formula_list = ["Q1R1", "Q1R2", "Q2R1", "Q2R2", "Q3R1","Q3R2", "Q4R1", "Q4R2", "Q5R1", "Q5R2", "Q6R1","Q6R2", "Q7R1", "Q7R2", "Q8R1", "Q8R2"]
 property_list = ["dG", "dH", "viscosity", "diffusion", "gfet", "dlcst", "sn2", "activity", "lysozyme"]
 
 if __name__ == "__main__":
+    start = time.perf_counter()
     for per, property in enumerate(property_list):
         for each, formula in enumerate(formula_list):
             formula_func = getattr(mod.formulas, formula)
