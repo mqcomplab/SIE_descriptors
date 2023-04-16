@@ -12,7 +12,6 @@ import numpy as np
 import time
 import os
 
-
 file_name = f"csv/ions.csv"
 formula_list = ["Q1R1", "Q1R2", "Q2R1", "Q2R2", "Q3R1","Q3R2", "Q4R1", "Q4R2", "Q5R1", "Q5R2", "Q6R1","Q6R2", "Q7R1", "Q7R2", "Q8R1", "Q8R2"]
 property = "dH"
