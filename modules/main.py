@@ -100,7 +100,7 @@ def read_data(file_name, property, formula, by_charge):
 def fit_parameters(formula, formula_func, property, df):
     """ Fits the parameters of a given formula function to a dataset.
 
-    Parameters:
+    Args:
         formula (str): The name of the formula being used.
         formula_func (function): The formula function being used.
         property (str): The name of the property being fit.
@@ -134,7 +134,7 @@ def plot_all_charges(prop, fit_data, ax, df):
     """ Plots a scatter plot of the fitted data against the actual data for a given property,
     along with a line of perfect agreement.
 
-    Parameters:
+    Args:
         prop (pandas Series): The actual property values.
         fit_data (numpy array): The fitted property values.
         ax (matplotlib Axes object): The subplot on which to plot the data.
@@ -164,7 +164,7 @@ def plot_by_charge(prop, fit_data, ax, ion_type, df):
     """ Plots a scatter plot of the fitted data against the actual data for a given property
     for either cations or anions, along with a line of best fit.
 
-    Parameters:
+    Args:
         prop (pandas Series): The actual property values.
         fit_data (numpy array): The fitted property values.
         ax (matplotlib Axes object): The subplot on which to plot the data.
@@ -203,7 +203,7 @@ def plot_by_charge(prop, fit_data, ax, ion_type, df):
 def custom_axis(formula, property, ax):
     """ Customize axes labels and title for different physical properties.
 
-    Parameters:
+    Args:
         formula (str): Chemical formula of the compound.
         property (str) :Name of the physical property. View `class prop_cols(Enum)` for supported options.
         ax (matplotlib.axes.Axes): Axes object to be customized.
@@ -271,7 +271,7 @@ def get_errors(prop, fit_data, parameters):
     """ Calculates the mean absolute error (MAE), root-mean square error (RMSE), Akaike Information Criterion with correction for small samples (AICC),
     and RMSE of leave-one-out cross-validation (LOOCV) for a given property and its corresponding fit data.
 
-    Parameters:
+    Args:
         prop (pandas Series): A 1-dimensional numpy array containing the actual property values.
         fit_data (np.ndarray): A 1-dimensional numpy array containing the fit data.
         parameters (np.ndarray): A 1-dimensional numpy array containing the parameters used for fitting from `curve_fit`.
@@ -292,8 +292,8 @@ def get_errors(prop, fit_data, parameters):
 
 def calculate_aicc_min(property, file_name, charge):
     """ Calculates the minimum Akaike information criterion corrected for small samples (AICc) for a given property and charge.
-    Parameters:
-
+    
+    Args:
         property (str): The name of the property for which the AICc is to be calculated.
         file_name (str): The name of the file containing the data to be read.
         charge (int): The charge of ions.
@@ -320,7 +320,7 @@ def calculate_aicc_min(property, file_name, charge):
 def replace_aicc(aicc_list, stats_result):
     """ Replace AICc values in stats_result DataFrame with the difference from the minimum AICc value.
 
-    Parameters:
+    Args:
         aicc_list (list): AICc values for each regression model.
         stats_result (pandas.DataFrame): Results summary DataFrame with model statistics.
 
@@ -339,7 +339,7 @@ def print_stats(formula, parameters, SE, mean_abs_err, rmse, loocv, aicc):
     """ Prints statistical results for a given formula, including mean absolute error (MAE), root-mean-square error (RMSE),
     leave-one-out cross-validation (LOOCV), and difference in Akaike information criterion corrected(dAICc).
 
-    Parameters:
+    Args:
         formula (str): The formula used to fit the data.
         parameters (array-like): Array of the fitted parameters from `curve_fit`.
         SE (array-like): Array of the standard errors of the fitted parameters.
