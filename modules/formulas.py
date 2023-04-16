@@ -1,23 +1,40 @@
 """
-This scripts contains all 16 formulas or models
-Author: Lexin Chen
+Q1R1 - Q8R2 are the 16 charge transfer models for predicting specific ion effect (SIE) properties. 
+
+Parameters
+-----------
+(all floats)
+X : two values of HOMO and LUMO energies
+m : fitting parameter, slope in the linear regression
+b : fitting parameter, y-intercept in the linear regression
+alpha : fitting parameter, size descriptor
+gamma : fitting parameter for charge descriptor
+b : fitting parameter for charge descriptor
+a : fitting parameter for charge descriptor
+xi : fitting parameter for charge descriptor
+h : fitting parameter for charge descriptor
+
+Return
+------------
+The predicted SIE property value for each model. 
 """
+
 import numpy as np
 def Q1R1(X, m, b):
   homo, lumo = X
-  return m * (-(-(-homo - lumo)/2)/(-homo + lumo))/((-homo+lumo) ** -1) + b
+  return m * (-(-(-homo - lumo)/2)/(-homo + lumo))/((-homo + lumo) ** -1) + b
 
 def Q1R2(X, m, b, alpha):
   homo, lumo = X
-  return m * (-(-(-homo - lumo)/2)/(-homo + lumo))/((-homo+lumo) ** alpha) + b
+  return m * (-(-(-homo - lumo)/2)/(-homo + lumo))/((-homo + lumo) ** alpha) + b
 
 def Q2R1(X, m, b, gamma):
   homo, lumo = X
-  return m * (-(-(-homo*gamma-lumo)/(1+gamma))/(-homo+lumo))/((-homo+lumo) ** -1) + b
+  return m * (-(-(-homo * gamma - lumo)/(1 + gamma))/(-homo + lumo))/((-homo + lumo) ** -1) + b
 
 def Q2R2(X, m, b, gamma, alpha):
   homo, lumo = X
-  return m * (-(-(-homo*gamma-lumo)/(1+gamma))/(-homo+lumo))/((-homo+lumo) ** alpha) + b
+  return m * (-(-(-homo * gamma - lumo)/(1 + gamma))/(-homo + lumo))/((-homo + lumo) ** alpha) + b
 
 def Q3R1(X, m, b):
   homo, lumo, homo1 = X
