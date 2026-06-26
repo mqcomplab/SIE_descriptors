@@ -156,7 +156,7 @@ def plot_all_charges(prop, fit_data, ax, df):
     ax.plot(x, y, dashes=[4, 4])
     texts = []
     for j, txt in enumerate(df.index):
-        texts.append(ax.text(prop[j], fit_data[j], txt, ha='center', va='center'))
+        texts.append(ax.text(prop.iloc[j], fit_data.iloc[j], txt, ha='center', va='center'))
     adjust_text(texts,ax=ax)
     return ax
 
@@ -196,7 +196,7 @@ def plot_by_charge(prop, fit_data, ax, ion_type, df):
     ax.plot(prop, p(prop), dashes=[4, 4])
     texts = []
     for j, txt in enumerate(df.index):
-        texts.append(ax.text(prop[j], fit_data[j], txt, ha='center', va='center'))
+        texts.append(ax.text(prop.iloc[j], fit_data.iloc[j], txt, ha='center', va='center'))
     adjust_text(texts,ax=ax)
     return ax
 
@@ -332,7 +332,7 @@ def replace_aicc(aicc_list, stats_result):
     else:
         aicc_min = np.min(aicc_list)
     daicc_list = list(map(lambda v: v - aicc_min, aicc_list))
-    stats_result.iloc[3]= ['%.2f' % elem for elem in daicc_list]
+    stats_result.iloc[3] = np.round(daicc_list, 2) # We are rounding here to 2 decimal places!!!
     return stats_result
 
 def print_stats(formula, parameters, SE, mean_abs_err, rmse, loocv, aicc):
