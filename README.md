@@ -22,3 +22,13 @@ The naming scheme of files is: `{a}_{b}_{c}_{d}.py`
 - `d` plot, table - plot will produce fitted plot or table will produce error analysis and fit values, respectatively.
 
 Stay tuned for the publication!
+
+### Packages required to run scripts in root folder:
+- matplotlib
+- numpy
+- pandas
+- scipy
+- adjusttext
+- scikit-learn
+- tabulate
+- jupyter notebook (optional; if one wants to compile formulas in `formulas_latexify.ipynb)
