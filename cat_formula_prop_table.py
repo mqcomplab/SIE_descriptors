@@ -34,7 +34,7 @@ if __name__ == "__main__":
                     prop, fit_data, parameters, SE = mod.fit_parameters(formula, formula_func, property, df)
                     mean_abs_err, rmse, loocv, aicc = mod.get_errors(prop, fit_data, parameters)
                     aicc_list.append(aicc)
-                    stats_df = mod.print_stats(formula, df, parameters, SE, mean_abs_err, rmse, loocv, aicc)
+                    stats_df = mod.print_stats(formula, parameters, SE, mean_abs_err, rmse, loocv, aicc)
                     stats_list.append(stats_df)
                 
             stats_result = pd.concat(stats_list, axis=1)
